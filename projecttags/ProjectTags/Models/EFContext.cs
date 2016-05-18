@@ -23,6 +23,7 @@ namespace ProjectTags.Models
         public DbSet<Processes> Processes { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<Teams> Teams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

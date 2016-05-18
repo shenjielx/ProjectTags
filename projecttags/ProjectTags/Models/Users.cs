@@ -56,13 +56,57 @@ namespace ProjectTags.Models
         [MaxLength(150)]
         public string Name { get; set; }
         /// <summary>
-        /// 性别（0-保密，1-男，2-女）
+        /// 性别（3-保密，1-男，2-女）
         /// </summary>
-        public int Gender { get; set; }
+        public UsersGender Gender { get; set; }
 
         /// <summary>
         /// 等级（0-普通用户，1-管理员，2-超级管理员）
         /// </summary>
         public int Rank { get; set; }
     }
+
+    #region 用户性别
+    /// <summary>
+    /// 用户性别
+    /// </summary>
+    public enum UsersGender
+    {
+        DEFAULT = 0,
+        /// <summary>
+        /// 男
+        /// </summary>
+        MALE = 1,
+        /// <summary>
+        /// 女
+        /// </summary>
+        FEMALE = 2,
+        /// <summary>
+        /// 保密
+        /// </summary>
+        SECRET = 3,
+    }
+    #endregion
+
+    #region 用户等级
+    /// <summary>
+    /// 用户等级
+    /// </summary>
+    public enum UsersRank
+    {
+        /// <summary>
+        /// 普通用户
+        /// </summary>
+        DEFAULT = 0,
+        /// <summary>
+        /// 管理员
+        /// </summary>
+        ADMIN = 1,
+        /// <summary>
+        /// 超级管理员
+        /// </summary>
+        SUPER = 2,
+    }
+    #endregion
+
 }

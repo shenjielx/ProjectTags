@@ -11,15 +11,15 @@ using ProjectTags.Unitil;
 
 namespace ProjectTags.Controllers
 {
-    public class ProjectsController : Controller
+    public class ProjectsController : BaseController
     {
-        private long UserID = 1;
         private EFContext db = new EFContext();
 
         // GET: Projects
         public ActionResult Index()
         {
-            return View(db.Projects.ToList());
+            var list = db.Projects.Where(x => db.Teams.Any(t => t.UserID == UserID && t.ProjectID == x.ID)).ToList();
+            return View(list);
         }
 
         // GET: Projects/Details/5
@@ -34,6 +34,8 @@ namespace ProjectTags.Controllers
             {
                 return HttpNotFound();
             }
+            var teams = db.Teams.Where(x => x.UserID == UserID && x.ProjectID == id).Include(x => x.User);
+            ViewBag.Processes = db.Processes.Where(x => teams.Any(t => t.ProjectID == x.Task.ProjectID)).OrderByDescending(x => x.CreateTime).Take(10).Include(t => t.State).Include(t => t.Create).Include(t => t.Task).ToList();
             return View(projects);
         }
 
@@ -56,7 +58,18 @@ namespace ProjectTags.Controllers
                 projects.CreateTime = DateTime.Now;
                 projects.WebClientIP = ToolBox.GetIP();
                 db.Projects.Add(projects);
-                db.SaveChanges();
+                var result = db.SaveChanges();
+                if (result==1)
+                {
+                    var team = new Teams();
+                    team.CreateID = UserID;
+                    team.CreateTime = DateTime.Now;
+                    team.ProjectID = projects.ID;
+                    team.UserID = UserID;
+                    team.WebClientIP= ToolBox.GetIP();
+                    db.Teams.Add(team);
+                    result = db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 
@@ -92,7 +105,7 @@ namespace ProjectTags.Controllers
                 projects.WebClientIP = ToolBox.GetIP();
                 db.Entry(projects).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = projects.ID });
             }
             return View(projects);
         }

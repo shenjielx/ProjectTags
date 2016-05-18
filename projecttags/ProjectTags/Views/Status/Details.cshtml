@@ -1,0 +1,114 @@
+﻿@model ProjectTags.Models.Status
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Status</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Create.WebClientIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create.WebClientIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Update.WebClientIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Update.WebClientIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrevID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrevID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NextID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NextID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Group)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebClientIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebClientIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEnable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEnable)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

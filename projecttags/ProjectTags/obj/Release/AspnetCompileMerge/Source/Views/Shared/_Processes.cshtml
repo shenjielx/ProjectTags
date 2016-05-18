@@ -1,0 +1,61 @@
+﻿@using ProjectTags.Models;
+@{ 
+    Layout = null;
+    var processes = ViewBag.Processes != null ? ViewBag.Processes as List<Processes> : new List<Processes>();
+}
+@foreach (var process in processes)
+{
+    var status = process.State;
+    #region 状态
+    string statusClass = "";
+    switch (status.Name)
+    {
+        case "新建":
+            statusClass = "list-group-item-primary";
+            break;
+        case "分配":
+            statusClass = "list-group-item-danger";
+            break;
+        case "接受":
+            statusClass = "list-group-item-warning";
+            break;
+        case "开始":
+            statusClass = "list-group-item-info";
+            break;
+        case "结束":
+            statusClass = "list-group-item-danger";
+            break;
+        case "提交":
+            statusClass = "list-group-item-danger";
+            break;
+        case "验收":
+            statusClass = "list-group-item-danger";
+            break;
+        case "完成":
+            statusClass = "list-group-item-success";
+            break;
+        default:
+            break;
+    }
+    #endregion
+    <div class="list-group-item @(statusClass)">
+        <div>
+            @Html.ActionLink(process.Create.UserName, "Details", "Users", new { area = "", id = process.CreateID }, new { @class = "" })
+            <strong>@status.Name</strong>
+            <span>任务</span>
+            @if (process.CreateID != process.UserID)
+            {
+                <span>
+                    给
+                    @Html.ActionLink(process.User.UserName, "Details", "Users", new { area = "", id = process.UserID }, new { @class = "" })
+                </span>
+            }
+            <span>：</span>
+            <span class="pull-right">@Html.DisplayFor(modelItem => process.CreateTime)</span>
+	</div>
+        <p class="list-group-item-text">
+            @Html.ActionLink(process.Task.Name, "Details", "Tasks", new { id = process.TaskID }, new { })
+            @*（@Html.ActionLink(process.Task.Project.Name, "Details", "Projects", new { id = process.Task.ProjectID }, new { })）*@
+        </p>
+    </div>
+}

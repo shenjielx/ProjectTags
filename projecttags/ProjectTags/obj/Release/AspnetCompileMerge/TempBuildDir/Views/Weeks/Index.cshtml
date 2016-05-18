@@ -1,0 +1,93 @@
+﻿@using ProjectTags.Models;
+@{
+    ViewBag.Title = "我的周报";
+    DateTime start = ViewBag.WeekStart;
+    DateTime end = ViewBag.WeekEnd;
+    var weeks = ViewBag.Weeks as List<Tasks>;
+    var nexts = ViewBag.Nexts as List<Tasks>;
+    int weeksIndex = 1, nextsIndex = 1;
+}
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading">我的周报（@(start.ToString("yyyy-MM-dd"))~@(end.ToString("yyyy-MM-dd"))）</div>
+    <div class="panel-body">
+        <p style="font-weight:bolder;color:red;">该周报列表仅供参考，请下载后自行核对！</p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="10" style="text-align:center;">
+                    本周（@(start.ToString("yyyy-MM-dd"))~@(end.ToString("yyyy-MM-dd"))）
+                </th>
+            </tr>
+            <tr>
+                <th>序号</th>
+                <th>项目</th>
+                <th>任务</th>
+                <th>状态</th>
+                <th>开发人员</th>
+                <th>负责人</th>
+                <th>计划开始时间</th>
+                <th>计划结束时间</th>
+                <th>实际开始时间</th>
+                <th>实际结束时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in weeks)
+            {
+                <tr>
+                    <th scope="row">@(weeksIndex++)</th>
+                    <td>@(item.Project.Name)</td>
+                    <td>@(item.Name)</td>
+                    <td>@(item.State.Name)</td>
+                    <td>@(ViewBag.UserName)</td>
+                    <td>@(item.Create.Name)</td>
+                    <td>@(item.PlanStart.HasValue? item.PlanStart.Value.ToString("yyyy-MM-dd"):"")</td>
+                    <td>@(item.PlanEnd.HasValue ? item.PlanEnd.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.RealStart.HasValue ? item.RealStart.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.RealEnd.HasValue ? item.RealEnd.Value.ToString("yyyy-MM-dd") : "")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="10" style="text-align:center;">
+                    下周（@(start.AddDays(7).ToString("yyyy-MM-dd"))~@(end.AddDays(7).ToString("yyyy-MM-dd"))）
+                </th>
+            </tr>
+            <tr>
+                <th>序号</th>
+                <th>项目</th>
+                <th>任务</th>
+                <th>状态</th>
+                <th>开发人员</th>
+                <th>负责人</th>
+                <th>计划开始时间</th>
+                <th>计划结束时间</th>
+                <th>实际开始时间</th>
+                <th>实际结束时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in nexts)
+            {
+                <tr>
+                    <th scope="row">@(nextsIndex++)</th>
+                    <td>@(item.Project.Name)</td>
+                    <td>@(item.Name)</td>
+                    <td>@(item.State.Name)</td>
+                    <td>@(ViewBag.UserName)</td>
+                    <td>@(item.Create.Name)</td>
+                    <td>@(item.PlanStart.HasValue ? item.PlanStart.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.PlanEnd.HasValue ? item.PlanEnd.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.RealStart.HasValue ? item.RealStart.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.RealEnd.HasValue ? item.RealEnd.Value.ToString("yyyy-MM-dd") : "")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

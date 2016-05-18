@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProjectTags.Models.Teams>
+
+@{
+    ViewBag.Title = "团队成员";
+    var groupArr = Model.GroupBy(x => x.ProjectID);
+    long? userID = ViewBag.UserID;
+}
+<div class="row">
+    @foreach (var group in groupArr)
+    {
+        var first = group.FirstOrDefault();
+        var list = group.ToList();
+            <div class="col-sm-6 col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            @Html.ActionLink(first.Project.Name, "Details", "Projects", new { id = first.ProjectID }, new { })
+                            <span class="pull-right">
+                                @if (first.Project.CreateID == userID)
+                                {
+                                    @Html.ActionLink("添加成员", "Create", "Teams", new { projectID = first.ProjectID }, new { })
+                                    @(" | ")@(Html.ActionLink("添加任务", "Create", "Tasks", new { projectID = first.ProjectID }, new { }))
+                                }
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="list-group" style="min-height:120px;">
+                        @foreach (var item in list)
+                        {
+                            <div class="list-group-item list-group-item-info">
+                                <p>
+                                    @Html.ActionLink(item.User.UserName, "Details", "Users", new { area = "", id = item.UserID }, new { @class = "" })
+                                    <span class="pull-right">@Html.DisplayFor(modelItem => item.CreateTime)</span>
+                                </p>
+                                <p>
+                                    @if (first.Project.CreateID == userID)
+                                    {
+                                        @Html.ActionLink("编辑", "Edit", new { id = item.ID })<span> | </span>
+                                        @Html.ActionLink("详情", "Details", new { id = item.ID })<span> | </span>
+                                        @Html.ActionLink("删除", "Delete", new { id = item.ID })
+                                    }
+                                </p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+    }
+</div>

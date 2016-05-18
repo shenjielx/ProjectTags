@@ -1,0 +1,67 @@
+﻿@using ProjectTags.ViewModels;
+@model HomeModels
+@{
+    ViewBag.Title = "首页";
+    DateTime start = ViewBag.WeekStart;
+    DateTime end = ViewBag.WeekEnd;
+}
+
+<div class="row">
+    <div class="col-sm-6 col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">本周概况（@(start.ToString("yyyy-MM-dd"))~@(end.ToString("yyyy-MM-dd"))）</div>
+            <div class="panel-body">
+                <ul class="nav nav-pills nav-justified">
+                    @foreach (var dict in Model.DictCount)
+                    {
+                        var arr = dict.Key.Split('#');
+                        var stateBgColor = arr[2];
+                        var urlHref = dict.Value > 0 ? Url.Action("Index", "Tasks", new { stateID = arr[1] }) : "javascript:;";
+                        <li role="presentation" class="@(dict.Key.StartsWith("分配")?"active":"")">
+                            <a href="@urlHref">
+                                @arr[0]
+                                <span class="badge @(dict.Value>0?stateBgColor:"")">@dict.Value</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span>任务列表</span>
+                    @Html.ActionLink("添加任务", "Create", "Tasks", new { }, new { @class="pull-right"})
+                </h3>
+            </div>
+            <div class="list-group" id="J_list"></div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">最新动态</h3>
+            </div>
+            <div class="list-group">
+                @Html.Partial("_Processes")
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    var basic = {
+        search: function (page) {
+            $.ajax({
+                url: "/tasks/list",
+                type: "Post",
+                data: { page: page },
+                success: function (res) {
+                    $("#J_list").html(res)
+                }
+            });
+        }
+    }
+    basic.search(1);
+</script>

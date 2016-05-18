@@ -32,7 +32,7 @@ namespace ProjectTags.Controllers
         /// <summary>
         /// 分页页码
         /// </summary>
-        public int PageSize = 15;
+        public int pageSize = 10;
         #endregion
 
         #region 序列化、json
@@ -66,21 +66,22 @@ namespace ProjectTags.Controllers
             var request = filterContext.HttpContext.Request;
             var response = filterContext.HttpContext.Response;
 
-            string cookie = ToolBox.GetCookie(ToolBox.FormsAuthCookieName);
             //Convert.ToInt64(string.IsNullOrEmpty(cookie) ? "0" : cookie);//
             LoginUser = ToolBox.GetLoginUser;
+            var validateToken = "";
             if (LoginUser!=null)
             {
-                ViewBag.token = ToolBox.DESEncrypt(UserID.ToString());
-
+                validateToken = ToolBox.DESEncrypt(LoginUser.UserID.ToString());
             }
-            var validateToken = ToolBox.DESEncrypt(UserID.ToString());
             if (LoginUser != null && validateToken == LoginUser.Token)
             {
+                ViewBag.token = validateToken;
                 Token = LoginUser.Token;
                 UserID = LoginUser.UserID;
                 UserName = LoginUser.UserName;
                 ViewBag.UserName = UserName;
+                ViewBag.UserID = UserID;
+                ViewBag.Rank = LoginUser.Rank;
             }
             else
             {
@@ -107,5 +108,34 @@ namespace ProjectTags.Controllers
         }
 
         #endregion
+
+        #region 获取状态
+        public void GetStatus()
+        {
+            ViewBag.ActiveStatusClass = !string.IsNullOrEmpty(Request["stateID"]) ? Convert.ToInt32(Request["stateID"]) : 0;
+            using (var dbTemp = new EFContext())
+            {
+                var status = dbTemp.Status.ToList();
+                var dictCount = new Dictionary<string, int>();
+                foreach (var state in status)
+                {
+                    var count = 0;
+                    if (state.ID==1)
+                    {
+                        count = dbTemp.Tasks.Count(x => x.CreateID == UserID);
+                    }
+                    else
+                    {
+                        count = dbTemp.Tasks.Count(x => x.State.Name == state.Name
+                        && dbTemp.Processes.Any(t => t.UserID == UserID && t.TaskID == x.ID && t.State.Name == "分配"));
+                    }
+                    dictCount.Add(state.Name + "#" + state.ID + "#" + state.BgColor, count);
+                }
+                ViewBag.DictCount = dictCount;
+                ViewBag.StatusList = status;
+            }
+        }
+        #endregion
+
     }
 }

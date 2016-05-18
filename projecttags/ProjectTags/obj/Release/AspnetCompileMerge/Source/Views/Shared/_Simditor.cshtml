@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+
+<link href="~/Content/simditor-2.3.6/styles/simditor.css" rel="stylesheet" />
+<script src="~/Content/simditor-2.3.6/scripts/module.min.js"></script>
+<script src="~/Content/simditor-2.3.6/scripts/uploader.min.js"></script>
+<script src="~/Content/simditor-2.3.6/scripts/hotkeys.min.js"></script>
+<script src="~/Content/simditor-2.3.6/scripts/simditor.min.js"></script>
+<script src="~/Content/simditor-2.3.6/scripts/simditor.min.js"></script>
+<script>
+    var toolbar = ['title', 'bold', 'italic', 'fontScale', 'color', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', 'hr'];
+    var editor = new Simditor({
+        textarea: $('#Desc'),
+        toolbar: toolbar
+    });
+</script>

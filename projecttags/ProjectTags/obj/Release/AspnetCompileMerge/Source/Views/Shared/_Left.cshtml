@@ -1,0 +1,44 @@
+﻿@{ 
+    Layout = null;
+    string url = ViewBag.Url;
+    if (!string.IsNullOrEmpty(url))
+    {
+        url = url.ToLower();
+    }
+    var list = ViewBag.DictCount as Dictionary<string, int>;
+    int status = ViewBag.ActiveStatusClass;
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <span>信息管理</span>
+        </h3>
+    </div>
+    <div class="list-group">
+            @Html.ActionLink("个人信息", "Details", "Users", new { area = "", id = ViewBag.UserID }, new { @class="list-group-item "+(url.StartsWith("/users/details") ||url.StartsWith("/users/basic") ? "active" : "" ) })
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <span>任务管理</span>
+        </h3>
+    </div>
+    <div class="list-group">
+        @if (list != null && list.Count > 0)
+        {
+            foreach (var dict in list)
+            {
+                var arr = dict.Key.Split('#');
+                var stateName = arr[0];
+                var stateID = Convert.ToInt32(arr[1]);
+                var stateBgColor = arr[2];
+                var activeClass = url.StartsWith("/tasks") && status == stateID ? "active" : "";
+                <a class="list-group-item @activeClass" href="/Tasks?stateID=@stateID">
+                    <span>@stateName</span>
+                    <span class="badge @(dict.Value>0?stateBgColor:"") pull-right">@dict.Value</span>
+                </a>
+            }
+        }
+    </div>
+</div>

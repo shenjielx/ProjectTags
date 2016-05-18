@@ -1,0 +1,82 @@
+﻿@model ProjectTags.Models.Teams
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Teams</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Create.WebClientIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create.WebClientIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Update.WebClientIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Update.WebClientIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.WebClientIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.WebClientIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebClientIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebClientIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEnable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEnable)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

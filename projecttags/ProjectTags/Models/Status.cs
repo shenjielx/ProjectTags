@@ -26,6 +26,16 @@ namespace ProjectTags.Models
         [MaxLength(320)]
         public string Desc { get; set; }
         /// <summary>
+        /// 背景颜色Class
+        /// </summary>
+        [MaxLength(45)]
+        public string BgColor { get; set; }
+        /// <summary>
+        /// 字体颜色Class
+        /// </summary>
+        [MaxLength(45)]
+        public string FontColor { get; set; }
+        /// <summary>
         /// 前置ID
         /// </summary>
         public long? PrevID { get; set; }

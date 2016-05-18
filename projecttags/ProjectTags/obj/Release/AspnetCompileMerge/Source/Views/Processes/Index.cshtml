@@ -1,0 +1,123 @@
+﻿@model IEnumerable<ProjectTags.Models.Processes>
+
+@{
+    Layout = null;
+    int count = Model.Count();
+    var width = (count / 8.0) * 100;
+    var last = Model.LastOrDefault();
+    var status = ViewBag.Status as IEnumerable<ProjectTags.Models.Status>;
+    var userID = ViewBag.UserID;
+}
+<div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: @(width)%">
+        <span>@(width.ToString("0"))% 完成【@last.State.Name】</span>
+    </div>
+</div>
+@foreach (var state in status)
+{
+    var item = Model.FirstOrDefault(x => x.StateID == state.ID);
+    if (item != null)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3" style="padding-left:0;">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <strong>@Html.DisplayFor(modelItem => state.Name)</strong>
+                        <span class="pull-right">@Html.DisplayFor(modelItem => item.Create.UserName)</span>
+                    </h3>
+                </div>
+                <div class="panel-body" style="height: 110px;">
+                    <div style="color:grey;">
+                        @if (state.Name == "新建")
+                        {
+                            if (item.UserID == userID && count <= 1)
+                            {
+                                @Html.ActionLink("分配", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                            }
+                            <p>
+                                <strong>@Html.DisplayFor(modelItem => item.Create.UserName)</strong>
+                                <span>@(state.Name)任务</span>
+                            </p>
+                        }
+                        else if (state.Name == "分配")
+                        {
+                            if (item.UserID == userID && count == 2)
+                            {
+                                @Html.ActionLink("接受任务", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                            }
+                            <p>
+                                <span>@(state.Name)任务给</span>
+                                <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong>
+                            </p>
+                        }
+                        else if (state.Name == "接受")
+                        {
+                            if (item.UserID == userID && count == 3)
+                            {
+                                @Html.ActionLink("开始", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                            }
+                            <p>
+                                <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong>
+                                <span>@(state.Name)任务</span>
+                            </p>
+                        }
+                        else if (state.Name == "开始")
+                        {
+                            if (item.UserID == userID && count == 4)
+                            {
+                                @Html.ActionLink("结束", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                            }
+                            <p>
+                                <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong>
+                                <span>@(state.Name)任务</span>
+                            </p>
+                        }
+                        else if (state.Name == "结束")
+                        {
+                            if (item.UserID == userID && count == 5)
+                            {
+                                @Html.ActionLink("提交代码", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                            }
+                            <p>
+                                <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong>
+                                <span>@(state.Name)任务</span>
+                            </p>
+                        }
+                        else if (state.Name == "提交")
+                        {
+                            if (item.UserID == userID && count == 6)
+                            {
+                                @Html.ActionLink("验收", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                            }
+                            <p>
+                                <strong>@Html.DisplayFor(modelItem => item.Create.UserName)</strong>
+                                <span>@(state.Name)任务</span>
+                            </p>
+                        }
+                        else if (state.Name == "验收")
+                        {
+                            if (item.UserID == userID && count == 7)
+                            {
+                                @Html.ActionLink("完成", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                            }
+                            <p>
+                                <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong>
+                                <span>@(state.Name)任务</span>
+                            </p>
+                        }
+                        else if (state.Name == "完成")
+                        {
+                            <p>
+                                <span>@(state.Name)任务</span>
+                            </p>
+                        }
+                    </div>
+                    <div>@Html.DisplayFor(modelItem => item.Remark)</div>
+                </div>
+                <div class="panel-footer">
+                    <span>@Html.DisplayFor(modelItem => item.CreateTime)</span>
+                </div>
+            </div>
+        </div>
+    }
+}

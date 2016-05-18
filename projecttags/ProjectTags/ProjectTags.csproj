@@ -117,13 +117,31 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\signin.css" />
+    <Content Include="Content\simditor-2.3.6\images\image.png" />
+    <Content Include="Content\simditor-2.3.6\scripts\hotkeys.js" />
+    <Content Include="Content\simditor-2.3.6\scripts\hotkeys.min.js" />
+    <Content Include="Content\simditor-2.3.6\scripts\jquery.min.js" />
+    <Content Include="Content\simditor-2.3.6\scripts\module.js" />
+    <Content Include="Content\simditor-2.3.6\scripts\module.min.js" />
+    <Content Include="Content\simditor-2.3.6\scripts\simditor.js" />
+    <Content Include="Content\simditor-2.3.6\scripts\simditor.min.js" />
+    <Content Include="Content\simditor-2.3.6\scripts\uploader.js" />
+    <Content Include="Content\simditor-2.3.6\scripts\uploader.min.js" />
+    <Content Include="Content\simditor-2.3.6\styles\simditor.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\simditor-2.3.6\styles\editor.scss" />
+    <Content Include="Content\simditor-2.3.6\styles\fonticon.scss" />
+    <Content Include="Content\simditor-2.3.6\styles\simditor.scss" />
+    <None Include="Properties\PublishProfiles\pt.seecoder.com.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="scripts\bootstrap-paginator.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
@@ -152,14 +170,30 @@
     <Content Include="Views\Tasks\Details.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Processes\Create.cshtml" />
+    <Content Include="Views\Processes\Delete.cshtml" />
+    <Content Include="Views\Processes\Details.cshtml" />
+    <Content Include="Views\Processes\Edit.cshtml" />
+    <Content Include="Views\Processes\Index.cshtml" />
+    <Content Include="Views\Status\Create.cshtml" />
+    <Content Include="Views\Status\Delete.cshtml" />
+    <Content Include="Views\Status\Details.cshtml" />
+    <Content Include="Views\Status\Edit.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProcessesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WeeksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,15 +203,34 @@
     <Compile Include="Models\Projects.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Tasks.cs" />
+    <Compile Include="Models\Teams.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unitil\ToolBox.cs" />
+    <Compile Include="Unitil\ToolDict.cs" />
+    <Compile Include="Unitil\ToolPager.cs" />
+    <Compile Include="ViewModels\HomeModels.cs" />
     <Compile Include="ViewModels\LoginBase.cs" />
     <Compile Include="ViewModels\LoginInfo.cs" />
+    <Compile Include="ViewModels\PagerModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Views\Teams\Create.cshtml" />
+    <Content Include="Views\Teams\Delete.cshtml" />
+    <Content Include="Views\Teams\Details.cshtml" />
+    <Content Include="Views\Teams\Edit.cshtml" />
+    <Content Include="Views\Teams\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Tasks\List.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\_Simditor.cshtml" />
+    <Content Include="Views\Shared\_Processes.cshtml" />
+    <Content Include="Views\Users\Basic.cshtml" />
+    <Content Include="Views\Shared\_Left.cshtml" />
+    <Content Include="Views\Weeks\Index.cshtml" />
+    <Content Include="Views\Weeks\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

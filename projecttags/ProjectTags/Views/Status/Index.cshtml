@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProjectTags.Models.Status>
+
+@{
+    ViewBag.Title = "Status List";
+}
+
+<h2>Status List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>状态节点</th>
+        <th>描述</th>
+        <th>排序</th>
+        <th>创建人</th>
+        <th>更新人</th>
+        <th>分组</th>
+        <th>创建时间</th>
+        <th>最后更新时间</th>
+        <th>最后更新IP</th>
+        <th>是否有效</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sort)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Create.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Update.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Group)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WebClientIP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsEnable)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

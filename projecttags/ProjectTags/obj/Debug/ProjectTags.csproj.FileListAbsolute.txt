@@ -51,3 +51,4 @@ D:\工作目录\ProjectTags\ProjectTags\bin\zh-Hans\System.Web.Http.resources.dl
 D:\工作目录\ProjectTags\ProjectTags\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
 D:\工作目录\ProjectTags\ProjectTags\obj\Debug\ProjectTags.dll
 D:\工作目录\ProjectTags\ProjectTags\obj\Debug\ProjectTags.pdb
+D:\工作目录\ProjectTags\ProjectTags\obj\Debug\ProjectTags.csprojResolveAssemblyReference.cache

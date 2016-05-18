@@ -1,0 +1,41 @@
+﻿@using ProjectTags.Unitil;
+@using ProjectTags.ViewModels;
+@model HomeModels
+@{
+    Layout = null;
+    var tasks = Model.Tasks;
+}
+
+@foreach (var task in tasks)
+{
+    var status = task.State;
+    <div class="list-group-item" style="padding-bottom:0;">
+        <h5 class="list-group-item-heading" style="font-weight:bolder;">
+            <strong>@(task.ID)、</strong>
+            <span>【@ToolDict.GetDictValue((int)task.Type,ToolDict.TasksTypeDict)】</span>
+            @Html.ActionLink(task.Name, "Details", "Tasks", new { id = task.ID }, new { })
+            @if (status != null)
+            {
+                <span class="label @(status.BgColor) @(status.FontColor)">@(status.Name)</span>
+            }
+        </h5>
+        <div style="color:grey;font-size:12px;">
+            <label>项目：</label>
+            <span>@Html.DisplayFor(model => task.Project.Name)</span>
+            <label>时间：</label>
+            <span>@Html.DisplayFor(model => task.CreateTime)</span>
+            <label>创建人：</label>
+            <span>@Html.ActionLink(task.Create.UserName, "Details", "Users", new { area = "",id= task.CreateID }, new { @class = "" })</span>
+            <span class="pull-right">
+	    <label>计划时间：</label>
+            <span>@(task.PlanStart.HasValue?task.PlanStart.Value.ToString("yyyy-MM-dd"):"")</span>
+            <span>~</span>
+            <span>@(task.PlanEnd.HasValue?task.PlanEnd.Value.ToString("yyyy-MM-dd"):"")</span>
+	    </span>
+        </div>
+    </div>
+}
+
+<div class="list-group-item">
+    @Html.Raw(ToolPager.GetJumperForAjax(Model.PageIndex, Model.PageSize, Model.TotalCount, "basic.search({0})"))
+</div>

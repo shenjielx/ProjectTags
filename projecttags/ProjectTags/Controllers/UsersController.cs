@@ -11,7 +11,7 @@ using ProjectTags.Unitil;
 
 namespace ProjectTags.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private EFContext db = new EFContext();
 
@@ -26,13 +26,14 @@ namespace ProjectTags.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                id = UserID;
             }
             Users users = db.Users.Find(id);
             if (users == null)
             {
                 return HttpNotFound();
             }
+            this.GetStatus();
             return View(users);
         }
 
@@ -95,6 +96,57 @@ namespace ProjectTags.Controllers
             return View(users);
         }
 
+        // GET: Users/Edit/5
+        public ActionResult Basic()
+        {
+            Users users = db.Users.Find(UserID);
+            if (users == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Gender = new SelectList(ToolDict.UsersGenderDict, "Key", "Value", (int)users.Gender);
+            this.GetStatus();
+            return View(users);
+        }
+
+        // POST: Users/Edit/5
+        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
+        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Basic([Bind(Include = "UserName,Email,Mobile,Name,Gender")] Users users)
+        {
+            if (ModelState.IsValid)
+            {
+                if (db.Users.Any(x => x.ID != UserID && x.UserName == users.UserName && !string.IsNullOrEmpty(x.UserName)))
+                {
+                    ViewBag.ErrorMsg = "昵称已存在！";
+                }
+                else if (db.Users.Any(x => x.ID != UserID && x.Email == users.Email && !string.IsNullOrEmpty(x.Email)))
+                {
+                    ViewBag.ErrorMsg = "邮箱已存在！";
+                }
+                else if (db.Users.Any(x => x.ID != UserID && x.Mobile == users.Mobile && !string.IsNullOrEmpty(x.Mobile)))
+                {
+                    ViewBag.ErrorMsg = "手机已存在！";
+                }
+                else
+                {
+                    var entity = db.Users.Find(UserID);
+                    entity.UserName = users.UserName;
+                    entity.Email = users.Email;
+                    entity.Mobile = users.Mobile;
+                    entity.Name = users.Name;
+                    entity.Gender = users.Gender;
+                    entity.UpdateTime = DateTime.Now;
+                    entity.WebClientIP = ToolBox.GetIP();
+                    db.Entry(entity).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Details");
+                }
+            }
+            return View(users);
+        }
         // GET: Users/Delete/5
         public ActionResult Delete(long? id)
         {

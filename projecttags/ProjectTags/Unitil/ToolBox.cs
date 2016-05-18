@@ -133,8 +133,8 @@ namespace ProjectTags.Unitil
             HttpContext context = System.Web.HttpContext.Current;
             DateTime expirationDate = expireTime;// DateTime.Now.Add(FormsAuthentication.Timeout);
 
-            var userData = string.Format("{0}{1}{2}{1}{3}{1}{4}{1}{5}", SecurityValidationKey, AUTH_TKT_USERDATA_DELIMITER,
-                user.UserID, user.UserName, user.Name,user.Token);
+            var userData = string.Format("{0}{1}{2}{1}{3}{1}{4}{1}{5}{1}{6}", SecurityValidationKey, AUTH_TKT_USERDATA_DELIMITER,
+                user.UserID, user.UserName, user.Name, user.Token, user.Rank);
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
                 1,
                 "_ptli",// projects tags login info
@@ -184,6 +184,10 @@ namespace ProjectTags.Unitil
                         if (arr.Length > 4)
                         {
                             user.Token = arr[4].ToString();
+                        }
+                        if (arr.Length > 5)
+                        {
+                            user.Rank = Convert.ToInt32(arr[5].ToString());
                         }
                     }
                 }
