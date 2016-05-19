@@ -30,7 +30,7 @@
                     <div style="color:grey;">
                         @if (state.Name == "新建")
                         {
-                            if (item.UserID == userID && count <= 1)
+                            if (item.UserID == userID && !Model.Any(x => x.State.Sort > item.State.Sort))
                             {
                                 @Html.ActionLink("分配", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
                             }
@@ -41,9 +41,13 @@
                         }
                         else if (state.Name == "分配")
                         {
-                            if (item.UserID == userID && count == 2)
+                            if (item.UserID == userID && !Model.Any(x => x.State.Sort > item.State.Sort))
                             {
-                                @Html.ActionLink("接受任务", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                                @Html.ActionLink("接受", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
+                            }
+                            if (item.CreateID == userID && !Model.Any(x=>x.State.Sort>item.State.Sort))
+                            {
+                                @Html.ActionLink("更改", "Edit", "Processes", new { id = item.ID }, new { @class = "btn btn-primary pull-right",@style="margin-right:5px;" })
                             }
                             <p>
                                 <span>@(state.Name)任务给</span>
@@ -52,7 +56,7 @@
                         }
                         else if (state.Name == "接受")
                         {
-                            if (item.UserID == userID && count == 3)
+                            if (item.UserID == userID && !Model.Any(x => x.State.Sort > item.State.Sort))
                             {
                                 @Html.ActionLink("开始", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
                             }
@@ -63,7 +67,7 @@
                         }
                         else if (state.Name == "开始")
                         {
-                            if (item.UserID == userID && count == 4)
+                            if (item.UserID == userID && !Model.Any(x => x.State.Sort > item.State.Sort))
                             {
                                 @Html.ActionLink("结束", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
                             }
@@ -74,7 +78,7 @@
                         }
                         else if (state.Name == "结束")
                         {
-                            if (item.UserID == userID && count == 5)
+                            if (item.UserID == userID && !Model.Any(x => x.State.Sort > item.State.Sort))
                             {
                                 @Html.ActionLink("提交代码", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
                             }
@@ -85,7 +89,7 @@
                         }
                         else if (state.Name == "提交")
                         {
-                            if (item.UserID == userID && count == 6)
+                            if (item.UserID == userID && !Model.Any(x => x.State.Sort > item.State.Sort))
                             {
                                 @Html.ActionLink("验收", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
                             }
@@ -96,7 +100,7 @@
                         }
                         else if (state.Name == "验收")
                         {
-                            if (item.UserID == userID && count == 7)
+                            if (item.UserID == userID && !Model.Any(x => x.State.Sort > item.State.Sort))
                             {
                                 @Html.ActionLink("完成", "Create", "Processes", new { taskID = item.TaskID }, new { @class = "btn btn-primary pull-right" })
                             }

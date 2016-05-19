@@ -27,10 +27,8 @@
                 <th>状态</th>
                 <th>开发人员</th>
                 <th>负责人</th>
-                <th>计划开始时间</th>
-                <th>计划结束时间</th>
-                <th>实际开始时间</th>
-                <th>实际结束时间</th>
+                <th>计划开发时间</th>
+                <th>实际开发时间</th>
             </tr>
         </thead>
         <tbody>
@@ -43,10 +41,8 @@
                     <td>@(item.State.Name)</td>
                     <td>@(ViewBag.UserName)</td>
                     <td>@(item.Create.Name)</td>
-                    <td>@(item.PlanStart.HasValue? item.PlanStart.Value.ToString("yyyy-MM-dd"):"")</td>
-                    <td>@(item.PlanEnd.HasValue ? item.PlanEnd.Value.ToString("yyyy-MM-dd") : "")</td>
-                    <td>@(item.RealStart.HasValue ? item.RealStart.Value.ToString("yyyy-MM-dd") : "")</td>
-                    <td>@(item.RealEnd.HasValue ? item.RealEnd.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.PlanStart.HasValue? item.PlanStart.Value.ToString("yyyy-MM-dd"):"")~@(item.PlanEnd.HasValue ? item.PlanEnd.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.RealStart.HasValue ? item.RealStart.Value.ToString("yyyy-MM-dd") : "")~@(item.RealEnd.HasValue ? item.RealEnd.Value.ToString("yyyy-MM-dd") : "")</td>
                 </tr>
             }
         </tbody>
@@ -66,10 +62,8 @@
                 <th>状态</th>
                 <th>开发人员</th>
                 <th>负责人</th>
-                <th>计划开始时间</th>
-                <th>计划结束时间</th>
-                <th>实际开始时间</th>
-                <th>实际结束时间</th>
+                <th>计划开发时间</th>
+                <th>实际开发时间</th>
             </tr>
         </thead>
         <tbody>
@@ -82,12 +76,11 @@
                     <td>@(item.State.Name)</td>
                     <td>@(ViewBag.UserName)</td>
                     <td>@(item.Create.Name)</td>
-                    <td>@(item.PlanStart.HasValue ? item.PlanStart.Value.ToString("yyyy-MM-dd") : "")</td>
-                    <td>@(item.PlanEnd.HasValue ? item.PlanEnd.Value.ToString("yyyy-MM-dd") : "")</td>
-                    <td>@(item.RealStart.HasValue ? item.RealStart.Value.ToString("yyyy-MM-dd") : "")</td>
-                    <td>@(item.RealEnd.HasValue ? item.RealEnd.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.PlanStart.HasValue ? item.PlanStart.Value.ToString("yyyy-MM-dd") : "")~@(item.PlanEnd.HasValue ? item.PlanEnd.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@(item.RealStart.HasValue ? item.RealStart.Value.ToString("yyyy-MM-dd") : "")~@(item.RealEnd.HasValue ? item.RealEnd.Value.ToString("yyyy-MM-dd") : "")</td>
                 </tr>
             }
         </tbody>
     </table>
+    <hr />
 </div>

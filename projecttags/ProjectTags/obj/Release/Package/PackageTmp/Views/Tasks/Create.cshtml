@@ -19,12 +19,14 @@
             </div>
             @Html.LabelFor(model => model.PlanStart, "计划开始", htmlAttributes: new { @class = "control-label col-md-1" })
             <div class="col-md-3">
-                @Html.EditorFor(model => model.PlanStart, new { htmlAttributes = new { @class = "form-control",@type="date" } })
+                <input type="date" class="form-control" id="PlanStart" name="PlanStart" value="@(Model.PlanStart.HasValue?Model.PlanStart.Value.ToString("yyyy-MM-dd"):"")" />
+                @*@Html.EditorFor(model => model.PlanStart, new { htmlAttributes = new { @class = "form-control",@type="date" } })*@
                 @Html.ValidationMessageFor(model => model.PlanStart, "", new { @class = "text-danger" })
             </div>
             @Html.LabelFor(model => model.PlanEnd, "计划结束", htmlAttributes: new { @class = "control-label col-md-1" })
             <div class="col-md-3">
-                @Html.EditorFor(model => model.PlanEnd, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                <input type="date" class="form-control" id="PlanEnd" name="PlanEnd" value="@(Model.PlanEnd.HasValue?Model.PlanEnd.Value.ToString("yyyy-MM-dd"):"")" />
+                @*@Html.EditorFor(model => model.PlanEnd, new { htmlAttributes = new { @class = "form-control", @type = "date" } })*@
                 @Html.ValidationMessageFor(model => model.PlanEnd, "", new { @class = "text-danger" })
             </div>
         </div>

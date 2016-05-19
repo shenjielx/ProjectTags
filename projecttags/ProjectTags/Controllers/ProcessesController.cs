@@ -90,6 +90,8 @@ namespace ProjectTags.Controllers
             
             ViewBag.StateID = new SelectList(db.Status, "ID", "Name", processes.StateID);
             ViewBag.TaskID = new SelectList(db.Tasks, "ID", "Name", processes.TaskID);
+            var users = db.Users.Where(x => db.Teams.Any(t => t.ProjectID == processes.Task.ProjectID && t.UserID == x.ID));
+            ViewBag.UserID = new SelectList(users, "ID", "UserName", processes.UserID);
             return View(processes);
         }
 
@@ -106,7 +108,8 @@ namespace ProjectTags.Controllers
                 return HttpNotFound();
             }
             ViewBag.StateID = new SelectList(db.Status, "ID", "Name", processes.StateID);
-            ViewBag.TaskID = new SelectList(db.Tasks, "ID", "Name", processes.TaskID);
+            var users = db.Users.Where(x => db.Teams.Any(t => t.ProjectID == processes.Task.ProjectID && t.UserID == x.ID));
+            ViewBag.UserID = new SelectList(users, "ID", "UserName", processes.UserID);
             return View(processes);
         }
 
@@ -115,19 +118,24 @@ namespace ProjectTags.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TaskID,StateID,CreateTime,CreateID,IsEnable")] Processes processes)
+        public ActionResult Edit([Bind(Include = "ID,StateID,UserID,Remark,IsEnable")] Processes processes)
         {
             if (ModelState.IsValid)
             {
-                processes.UpdateID = UserID;
-                processes.UpdateTime = DateTime.Now;
-                processes.WebClientIP = ToolBox.GetIP();
-                db.Entry(processes).State = EntityState.Modified;
+                var entity = db.Processes.Find(processes.ID);
+                entity.StateID = processes.StateID;
+                entity.UserID = processes.UserID;
+                entity.Remark += (!string.IsNullOrEmpty(entity.Remark) ? " # " : "") + processes.Remark;
+                entity.UpdateID = UserID;
+                entity.UpdateTime = DateTime.Now;
+                entity.WebClientIP = ToolBox.GetIP();
+                db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Tasks", new { id = processes.TaskID });
             }
             ViewBag.StateID = new SelectList(db.Status, "ID", "Name", processes.StateID);
-            ViewBag.TaskID = new SelectList(db.Tasks, "ID", "Name", processes.TaskID);
+            var users = db.Users.Where(x => db.Teams.Any(t => t.ProjectID == processes.Task.ProjectID && t.UserID == x.ID));
+            ViewBag.UserID = new SelectList(users, "ID", "UserName", processes.UserID);
             return View(processes);
         }
 

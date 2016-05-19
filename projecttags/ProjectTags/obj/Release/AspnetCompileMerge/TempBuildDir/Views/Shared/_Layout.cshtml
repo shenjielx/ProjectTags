@@ -66,6 +66,9 @@
                     <li class="@(url.StartsWith("/weeks") ? "active" : "" )">
                         @Html.ActionLink("我的周报", "Index", "Weeks", new { area = "" }, new { @class = "" })
                     </li>
+                    <li class="@(url.StartsWith("/echarts") ? "active" : "" )">
+                        @Html.ActionLink("Echarts", "Index", "Echarts", new { area = "" }, new { @class = "" })
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

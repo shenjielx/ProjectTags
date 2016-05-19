@@ -130,7 +130,7 @@ namespace ProjectTags.Controllers
                         result = db.SaveChanges();
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { stateID = 1 });
             }
 
             ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Name", tasks.ProjectID);

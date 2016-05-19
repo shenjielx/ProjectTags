@@ -1,61 +1,61 @@
 ﻿@model ProjectTags.Models.Processes
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "更新状态";
 }
-
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Processes</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
-        @Html.HiddenFor(model => model.CreateID)
-        @Html.HiddenFor(model => model.CreateTime)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TaskID, "TaskID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TaskID, "任务", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("TaskID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DisplayFor(model => model.Task.Name)
                 @Html.ValidationMessageFor(model => model.TaskID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StateID, "StateID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.StateID, "阶段", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
                 @Html.DropDownList("StateID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsEnable, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.StateID, "负责人", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.IsEnable, "是否有效", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.IsEnable)
                     @Html.ValidationMessageFor(model => model.IsEnable, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remark, "备注", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea id="Remark" name="Remark" class = "form-control"></textarea>
+                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="更新" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

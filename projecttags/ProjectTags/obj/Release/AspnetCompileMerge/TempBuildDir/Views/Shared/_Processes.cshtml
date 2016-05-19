@@ -53,7 +53,7 @@
             <span>：</span>
             <span class="pull-right">@Html.DisplayFor(modelItem => process.CreateTime)</span>
 	</div>
-        <p class="list-group-item-text">
+        <p class="list-group-item-text" title="@process.Task.Name" style="word-break: break-word;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: block;">
             @Html.ActionLink(process.Task.Name, "Details", "Tasks", new { id = process.TaskID }, new { })
             @*（@Html.ActionLink(process.Task.Project.Name, "Details", "Projects", new { id = process.Task.ProjectID }, new { })）*@
         </p>

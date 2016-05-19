@@ -144,6 +144,13 @@
     <Content Include="scripts\bootstrap-paginator.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\echarts\echarts.min.js" />
+    <Content Include="scripts\echarts\themes\dark.js" />
+    <Content Include="scripts\echarts\themes\infographic.js" />
+    <Content Include="scripts\echarts\themes\macarons.js" />
+    <Content Include="scripts\echarts\themes\roma.js" />
+    <Content Include="scripts\echarts\themes\shine.js" />
+    <Content Include="scripts\echarts\themes\vintage.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
@@ -185,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\EchartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProcessesController.cs" />
@@ -231,6 +239,7 @@
     <Content Include="Views\Shared\_Left.cshtml" />
     <Content Include="Views\Weeks\Index.cshtml" />
     <Content Include="Views\Weeks\List.cshtml" />
+    <Content Include="Views\Echarts\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
